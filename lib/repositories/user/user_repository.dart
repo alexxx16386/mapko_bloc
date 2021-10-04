@@ -10,9 +10,4 @@ class UserRepository {
     required AuthBloc authBloc,
   }) : _authBloc = authBloc;
 
-  Future<UserModel> getCurrrentUserInfo() async {
-    return _userProvider.getCurrrentUserInfo(
-      token: _authBloc.state.token!,
-    );
-  }
 }

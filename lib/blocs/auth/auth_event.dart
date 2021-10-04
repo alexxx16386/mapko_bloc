@@ -18,3 +18,6 @@ class AuthEventLogIn extends AuthEvent {
 }
 
 class AuthEventInitUser extends AuthEvent {}
+
+class AuthEventLoadUser extends AuthEvent {}
+

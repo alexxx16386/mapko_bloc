@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mapko_bloc/blocs/blocs.dart';
+import 'package:mapko_bloc/blocs/auth/auth_bloc.dart';
 
 import '../screens.dart';
 
@@ -20,12 +20,12 @@ class SplashScreen extends StatelessWidget {
       onWillPop: () async => false,
       child: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
-          if (state.status == AuthStatus.unauthenticated) {
+          if (state.status == AuthStatus.unauthorized) {
             Navigator.of(context).pushNamedAndRemoveUntil(
               LoginScreen.routeName,
               (route) => false,
             );
-          } else if (state.status == AuthStatus.authenticated) {
+          } else if (state.status == AuthStatus.authorized) {
             Navigator.of(context).pushNamedAndRemoveUntil(
               NavScreen.routeName,
               (route) => false,

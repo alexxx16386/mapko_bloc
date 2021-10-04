@@ -25,9 +25,7 @@ class SignupCubit extends Cubit<SignupState> {
   }
 
   void signUpWithCredentials() async {
-    print(1);
     if (!state.isFormValid || state.status == SignupStatus.submitting) return;
-    print(2);
 
     emit(state.copyWith(status: SignupStatus.submitting));
     try {

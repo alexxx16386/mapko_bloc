@@ -1,42 +1,38 @@
 import 'dart:async';
+import 'package:mapko_bloc/models/models.dart';
 import 'package:mapko_bloc/repositories/auth/auth_provider.dart';
-import 'package:mapko_bloc/repositories/token/token_repository.dart';
+
 
 class AuthRepository {
-  final TokenRepository _tokenRepository;
   final AuthProvider _authProvider = AuthProvider();
 
-  AuthRepository({
-    required TokenRepository tokenRepository,
-  }) : _tokenRepository = tokenRepository;
-
-  Future signUpWithEmailAndPassword({
+  Future<String> signUpWithEmailAndPassword({
     required String username,
     required String email,
     required String password,
   }) async {
-    _tokenRepository.persistToken(
-      await _authProvider.signUp(
-        username: username,
-        email: email,
-        password: password,
-      ),
+    final String token = await _authProvider.signUp(
+      username: username,
+      email: email,
+      password: password,
     );
+
+    return token;
   }
 
-  Future logInWithEmailAndPassword({
+  Future<String> logInWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
-    _tokenRepository.persistToken(
-      await _authProvider.logIn(
-        email: email,
-        password: password,
-      ),
+    return _authProvider.logIn(
+      email: email,
+      password: password,
     );
   }
 
-  Future<void> logOut() async {
-    _tokenRepository.deleteToken();
+  Future<UserModel> getCurrrentUserInfo(String token) async {
+    return _authProvider.getCurrrentUserInfo(
+      token: token,
+    );
   }
 }

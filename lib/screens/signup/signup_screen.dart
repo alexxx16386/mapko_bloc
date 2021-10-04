@@ -48,7 +48,7 @@ class _SignupScreenState extends State<SignupScreen> {
               showDialog(
                 context: context,
                 builder: (context) => ErrorDialog(
-                  content: state.failure.message,
+                  content: state.failure.message, title: '',
                 ),
               );
             }

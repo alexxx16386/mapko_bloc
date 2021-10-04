@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mapko_bloc/blocs/auth/auth_bloc.dart';
 import 'package:mapko_bloc/blocs/simple_bloc_observer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mapko_bloc/repositories/token/token_provider.dart';
+import 'package:mapko_bloc/repositories/storage/storage_repository.dart';
 
 import 'config/custom_router.dart';
 import 'repositories/repositories.dart';
@@ -19,22 +19,32 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider(create: (_) => TokenProvider()),
+        RepositoryProvider<TokenRepository>(create: (_) => TokenRepository()),
+        RepositoryProvider<StorageRepository>(
+          create: (_) => StorageRepository(),
+        ),
+        RepositoryProvider<AuthRepository>(create: (_) => AuthRepository()),
       ],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (_) => AuthBloc()),
+          BlocProvider<AuthBloc>(
+            create: (_) => AuthBloc(
+              tokenRepository: _.read<TokenRepository>(),
+              storageRepository: _.read<StorageRepository>(),
+              authRepository: _.read<AuthRepository>(),
+            ),
+          ),
         ],
         child: MultiRepositoryProvider(
           providers: [
             RepositoryProvider<LocationRepository>(
               create: (_) => LocationRepository(authBloc: _.read<AuthBloc>()),
             ),
-            RepositoryProvider(
+            RepositoryProvider<ChatRepository>(
               create: (_) => ChatRepository(authBloc: _.read<AuthBloc>()),
             ),
-            RepositoryProvider(
-              create: (_) => UserRepository(),
+            RepositoryProvider<UserRepository>(
+              create: (_) => UserRepository(authBloc: _.read<AuthBloc>()),
             ),
           ],
           child: MaterialApp(

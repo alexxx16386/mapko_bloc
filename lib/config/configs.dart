@@ -3,6 +3,8 @@ import 'package:latlong/latlong.dart';
 
 const SERVER_IP = 'https://dev.mapko.net/api';
 const MSG_SERVER_URL = 'https://ws.mapko.net';
+const LOCAL_STORAGE_KEY = 'mapko_key';
+
 LatLng kStartedPosition = LatLng(55.449623, 34.502302);
 TileLayerOptions kOptions = TileLayerOptions(
   urlTemplate:

@@ -4,16 +4,16 @@ import 'package:mapko_bloc/repositories/token/token_provider.dart';
 class TokenRepository {
   final TokenProvider _tokenProvider = TokenProvider();
 
-  Future<String> getToken() async {
+  Future<String?> getToken() async {
     return _tokenProvider.getToken();
   }
 
-  void deleteToken() {
-    _tokenProvider.deleteToken();
+  Future<void> deleteToken() {
+    return _tokenProvider.deleteToken();
   }
 
-  void persistToken(String? token) {
-    _tokenProvider.persistToken(token);
+  Future<void> persistToken(String? token) {
+    return _tokenProvider.persistToken(token);
   }
 
   Future<bool> hasToken() async {

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mapko_bloc/blocs/blocs.dart';
-import 'package:mapko_bloc/repositories/keys/keys_repository.dart';
 import 'package:mapko_bloc/repositories/repositories.dart';
 import 'package:mapko_bloc/screens/profile/widgets/widgets.dart';
 import 'package:mapko_bloc/widgets/widgets.dart';
@@ -17,7 +15,6 @@ class ProfileScreen extends StatelessWidget {
       builder: (context) => BlocProvider<ProfileBloc>(
         create: (_) => ProfileBloc(
           userRepository: context.read<UserRepository>(),
-          authBloc: context.read<AuthBloc>(),
         )..add(
             ProfileLoadUser(),
           ),
@@ -33,7 +30,7 @@ class ProfileScreen extends StatelessWidget {
         if (state.status == ProfileStatus.error) {
           showDialog(
             context: context,
-            builder: (context) => ErrorDialog(content: state.failure.message),
+            builder: (context) => ErrorDialog(content: state.failure.message, title: '',),
           );
         }
       },
