@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mapko_bloc/blocs/blocs.dart';
 import 'package:mapko_bloc/repositories/repositories.dart';
 import 'package:mapko_bloc/screens/profile/widgets/widgets.dart';
 import 'package:mapko_bloc/widgets/widgets.dart';
@@ -30,7 +31,10 @@ class ProfileScreen extends StatelessWidget {
         if (state.status == ProfileStatus.error) {
           showDialog(
             context: context,
-            builder: (context) => ErrorDialog(content: state.failure.message, title: '',),
+            builder: (context) => ErrorDialog(
+              content: state.failure.message,
+              title: '',
+            ),
           );
         }
       },
@@ -59,11 +63,7 @@ class ProfileScreen extends StatelessWidget {
           title: Text('LogOut'),
           leading: Icon(Icons.logout),
           onTap: () {
-            context.read<AuthBloc>().add(AuthLogoutReuested());
-            KeysRepository().navKey.currentState!.pushNamedAndRemoveUntil(
-                  LoginScreen.routeName,
-                  (route) => true,
-                );
+            context.read<AuthBloc>().add(AuthEventLogOut());
           },
         ),
       ],

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mapko_bloc/blocs/auth/auth_bloc.dart';
 import 'package:mapko_bloc/blocs/simple_bloc_observer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mapko_bloc/repositories/storage/storage_repository.dart';
 
+import 'blocs/blocs.dart';
 import 'config/custom_router.dart';
 import 'repositories/repositories.dart';
 import 'screens/screens.dart';

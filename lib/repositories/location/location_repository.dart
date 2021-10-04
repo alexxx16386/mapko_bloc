@@ -1,6 +1,6 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong/latlong.dart';
-import 'package:mapko_bloc/blocs/auth/auth_bloc.dart';
+import 'package:mapko_bloc/blocs/blocs.dart';
 
 import 'package:mapko_bloc/models/models.dart';
 import 'package:mapko_bloc/repositories/location/location_provider.dart';
